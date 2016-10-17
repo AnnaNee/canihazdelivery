@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>ACME Restaurant</title>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
-</head>
-<body ng-app="init">
-  <h1>Welcome to ACME Restaurant</h1>
-  <div><a href="check.html">check here the delivery availability in your area</a></div>
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <title>ACME Restaurant</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
+    <script src="js/controllers.js"></script>
+  </head>
+  <body ng-app="init">
+    <a ng-href="/">Ola</a>
+    <ng-view></ng-view>
+  </body>
 </html>
