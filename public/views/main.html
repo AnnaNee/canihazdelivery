@@ -1,1 +1,51 @@
-<h1>Olar 2</h1>
+<div class="container-fluid main-bg">
+	<div class="vertical-align">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3 col-xs-12 text-center">
+				<div class="logo logo-lg logo-main">Can I Haz Delivery?</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12 col-xs-12">
+				<div class="row">
+					<div class="col-md-6 col-md-offset-3 col-xs-12">
+						<div class="form-group">
+							<div class="row">
+								<div class="col-md-12 col-xs-12 no-padding">
+						  		<input class="input-item" id="autocomplete" placeholder="Search adress..." ng-focus="geolocate()" type="text"></input>
+						  	</div>
+						  </div>
+
+							<div class="row">
+								<div class="col-md-10 col-xs-10 no-padding">
+									<input class="input-item street-input" ng-model="user.route" id="route" placeholder="Street" disabled="true"></input>
+								</div>
+								<div class="col-md-2 col-xs-2 no-padding">
+									<input class="input-item" ng-model="user.street_number" id="street_number" placeholder="Number" disabled="true"></input>
+						  	</div>
+						  </div>
+
+							<div class="row">
+								<div class="col-md-10 col-xs-10 no-padding">
+									<input class="input-item city-input" ng-model="user.locality" id="locality" placeholder="City" disabled="true"></input>
+								</div>
+								<div class="col-md-2 col-xs-2 no-padding">
+									<input class="input-item" ng-model="user.administrative_area_level_1" id="administrative_area_level_1" placeholder="State" disabled="true"></input></td>
+						  	</div>
+						  </div>
+
+						  <div class="row">
+						  	<div class="col-md-12 col-xs-12 no-padding">
+									<button class="btn btn-default btn-block btn-lg btn-check-delivery" id="validateAdress" ng-click="checkAdress()" >
+										<span>Can I Haz Delivery?</span>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css?family=Wendy+One');
+
+/* Helpers */
+.vertical-align {
+	position: relative;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+.text-center {
+	text-align: center;
+}
+
+.no-padding {
+	padding: 0;
+}
+
+/* Design Patterns */
+.btn {
+	border: 0;
+	padding: 1rem;
+	cursor: pointer;
+}
+
+.btn-lg {
+	font-size: 1.4rem;
+}
+
+.btn-block {
+	width: 100%;
+}
+
+.btn-default {
+	background-color: #FDB627;
+	color: #FFF;
+	font-family: 'Wendy One', sans-serif;
+}
+
+.btn-default:hover{
+	background-color: #FFAA00;
+}
+
+.logo {
+	font-family: 'Wendy One', sans-serif;
+	color: #FFF;
+	text-shadow: 4px 4px 0px gray;
+}
+
+.logo-lg {
+	font-size: 4rem;
+}
+
+/* General rules */
+body {
+	margin: 0;
+}
+
+/* Main Page */
+.main-bg {
+	background-image: url("../images/bg.png");
+	height: 100vh;
+	background-size: cover;
+}
+
+.form-group .input-item {
+	width: 100%;
+    border: 0;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.logo-main {
+	margin-bottom: 5rem;
+}
+
+.city-input.input-item,
+.street-input.input-item {
+	border-right: 1px solid #CCC;
+}
+
+.btn-check-delivery:hover span{
+	display: none;
+}
+
+.btn-check-delivery:hover:before{
+	content: "We Shall See!";
+	background-color: #ffaa00;
+}
