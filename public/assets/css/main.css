@@ -53,8 +53,10 @@
 }
 
 /* General rules */
-body {
+body,
+html {
 	margin: 0;
+	height: 100%;
 }
 
 /* Main Page */
@@ -87,4 +89,9 @@ body {
 .btn-check-delivery:hover:before{
 	content: "We Shall See!";
 	background-color: #ffaa00;
+}
+
+/* Availability Page */
+#map {
+height: 100%;
 }

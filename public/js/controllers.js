@@ -5,6 +5,10 @@ app.config(['$routeProvider', function($routeProvider) {
     .when("/", {
         templateUrl : "views/main.html",
         controller: "InitController"
+    })
+    .when("/check", {
+        templateUrl : "views/check.html",
+        controller: "availabilityController"
     });
 }]);
 
@@ -57,7 +61,7 @@ app.controller('InitController', ['$scope', '$location',function($scope, $locati
 		if ($scope.user.addressType === undefined || $scope.user.addressType == '') {
 			alert('Please, fill in your adress.');
 		} else {
-			$location.path('/oi');
+			$location.path('/check');
 		}
 	}
 
@@ -78,4 +82,38 @@ app.controller('InitController', ['$scope', '$location',function($scope, $locati
 	}
 
 	$scope.initAutocomplete();
+}])
+
+app.controller('availabilityController', ['$scope', '$location', function($scope, $location) {
+
+	function initMap() {
+	  var map = new google.maps.Map(document.getElementById('map'), {
+	    zoom: 4,
+	    center: {lat: -23.5842987, lng: -46.6834824},
+	    mapTypeId: google.maps.MapTypeId.ROADMAP
+	  });
+
+		var marker = new google.maps.Marker({
+		  map: map,
+		  position: new google.maps.LatLng(-23.5842987, -46.6834824),
+		  title: 'Can I Haz Delivery?'
+		});
+
+		map.setZoom(10);
+		var miles = 2.48548;
+
+    var circle = new google.maps.Circle({
+      strokeColor: '#FF0000',
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      fillColor: '#FF0000',
+      fillOpacity: 0.35,
+      map: map,
+      radius: miles * 1609.344 // equals 1 mile in radius
+    });
+
+    circle.bindTo('center', marker, 'position');
+	}
+
+	initMap();
 }]);
