@@ -101,6 +101,7 @@ app.controller('availabilityController', ['$scope', '$location', 'userLocationSe
 			return false;
 		} else {
 			return true;
+		}
 	}
 
 	function initMap() {
