@@ -53,8 +53,6 @@ app.controller('InitController', ['$scope', '$location',function($scope, $locati
 	      $scope.user.addressType = val;
 	    }
 	  }
-
-	  console.log($scope.user.route);
 	}
 
 	$scope.checkAdress = function() {
