@@ -61,7 +61,7 @@ app.controller('InitController', ['$scope', '$location', 'userLocationService', 
 
 	  $scope.userLat = place.geometry.location.lat();
 	  $scope.userLng = place.geometry.location.lng();
-	  $scope.location = [$scope.userLng, $scope.userLat];
+	  $scope.location = [$scope.userLat, $scope.userLng];
 
 	  userLocationService.setLocation($scope.location);
 	}
@@ -91,6 +91,8 @@ app.controller('availabilityController', ['$scope', '$location', 'userLocationSe
 		var placeLat = -23.5842987;
 		var placeLng = -46.6834824;
 
+		console.log('user:', userLat, userLng, 'place:', placeLat, placeLng)
+
 		var locations = [
 			['Your location', userLat, userLng],
 			['Can I Haz Delivery?', placeLat, placeLng]
@@ -108,6 +110,13 @@ app.controller('availabilityController', ['$scope', '$location', 'userLocationSe
 				return true;
 			}
 		}
+
+			var toUser = new google.maps.LatLng(userLat, userLng);
+			var fromPlace = new google.maps.LatLng(placeLat, placeLng);
+
+			var calculatedDistance = google.maps.geometry.spherical.computeDistanceBetween(fromPlace, toUser);
+			console.log('Calculated distance:', calculatedDistance);
+
 
 		function initMap() {
 		  var map = new google.maps.Map(document.getElementById('map'), {
