@@ -79,62 +79,68 @@ app.controller('InitController', ['$scope', '$location', 'userLocationService', 
 
 app.controller('availabilityController', ['$scope', '$location', 'userLocationService', function($scope, $location, userLocationService) {
 
-	$scope.userLocation = userLocationService.getLocation();
-	var userLat = $scope.userLocation[0];
-	var userLng = $scope.userLocation[1];
+	if (userLocationService.getLocation() === null) {
+		$location.path('/');
 
-	var placeLat = -23.5842987;
-	var placeLng = -46.6834824;
+	} else {
 
-	var locations = [
-		['Your location', userLat, userLng],
-		['Can I Haz Delivery?', placeLat, placeLng]
-	];
+		$scope.userLocation = userLocationService.getLocation();
+		var userLat = $scope.userLocation[0];
+		var userLng = $scope.userLocation[1];
 
-	$scope.isDeliveryAvailable = function() {
-		var toUser = new google.maps.LatLng(userLat, userLng);
-		var fromPlace = new google.maps.LatLng(placeLat, placeLng);
+		var placeLat = -23.5842987;
+		var placeLng = -46.6834824;
 
-		var calculatedDistance = google.maps.geometry.spherical.computeDistanceBetween(fromPlace, toUser);
+		var locations = [
+			['Your location', userLat, userLng],
+			['Can I Haz Delivery?', placeLat, placeLng]
+		];
 
-		if (calculatedDistance > 4000) {
-			return false;
-		} else {
-			return true;
+		$scope.isDeliveryAvailable = function() {
+			var toUser = new google.maps.LatLng(userLat, userLng);
+			var fromPlace = new google.maps.LatLng(placeLat, placeLng);
+
+			var calculatedDistance = google.maps.geometry.spherical.computeDistanceBetween(fromPlace, toUser);
+
+			if (calculatedDistance > 4000) {
+				return false;
+			} else {
+				return true;
+			}
 		}
+
+		function initMap() {
+		  var map = new google.maps.Map(document.getElementById('map'), {
+		    zoom: 4,
+		    center: {lat: placeLat, lng: placeLng},
+		    mapTypeId: google.maps.MapTypeId.ROADMAP
+		  });
+
+		  var marker, i;
+
+		  for (i = 0; i < locations.length; i++) {
+		  	marker = new google.maps.Marker({
+		  		map: map,
+		  		position: new google.maps.LatLng(locations[i][1], locations[i][2])
+		  	});
+		  }
+
+			map.setZoom(10);
+			var miles = 4000;
+
+	    var circle = new google.maps.Circle({
+	      strokeColor: '#FF0000',
+	      strokeOpacity: 0.8,
+	      strokeWeight: 2,
+	      fillColor: '#FF0000',
+	      fillOpacity: 0.35,
+	      map: map,
+	      radius: miles
+	    });
+
+	    circle.bindTo('center', marker, 'position');
+		}
+
+		initMap();
 	}
-
-	function initMap() {
-	  var map = new google.maps.Map(document.getElementById('map'), {
-	    zoom: 4,
-	    center: {lat: placeLat, lng: placeLng},
-	    mapTypeId: google.maps.MapTypeId.ROADMAP
-	  });
-
-	  var marker, i;
-
-	  for (i = 0; i < locations.length; i++) {
-	  	marker = new google.maps.Marker({
-	  		map: map,
-	  		position: new google.maps.LatLng(locations[i][1], locations[i][2])
-	  	});
-	  }
-
-		map.setZoom(10);
-		var miles = 4000;
-
-    var circle = new google.maps.Circle({
-      strokeColor: '#FF0000',
-      strokeOpacity: 0.8,
-      strokeWeight: 2,
-      fillColor: '#FF0000',
-      fillOpacity: 0.35,
-      map: map,
-      radius: miles
-    });
-
-    circle.bindTo('center', marker, 'position');
-	}
-
-	initMap();
 }]);
