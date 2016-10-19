@@ -12,11 +12,14 @@ app.config(['$routeProvider', function($routeProvider) {
     });
 }]);
 
-app.controller('InitController', ['$scope', '$location',function($scope, $location) {
+app.controller('InitController', ['$scope', '$location', 'userLocationService', function($scope, $location, userLocationService) {
 
 	$scope.user = {};
 
 	var addressType;
+	$scope.userLat;
+	$scope.userLng;
+	$scope.location;
 
 	var placeSearch, autocomplete;
 	var componentForm = {
@@ -56,7 +59,11 @@ app.controller('InitController', ['$scope', '$location',function($scope, $locati
 	    }
 	  }
 
-    console.log("Latitude: " + place.geometry.location.lat() + " Longitude: " + place.geometry.location.lng());
+	  $scope.userLat = place.geometry.location.lat();
+	  $scope.userLng = place.geometry.location.lng();
+	  $scope.location = [$scope.userLng, $scope.userLat];
+
+	  userLocationService.setLocation($scope.location);
 	}
 
 	$scope.checkAdress = function() {
@@ -70,7 +77,9 @@ app.controller('InitController', ['$scope', '$location',function($scope, $locati
 	$scope.initAutocomplete();
 }])
 
-app.controller('availabilityController', ['$scope', '$location', function($scope, $location) {
+app.controller('availabilityController', ['$scope', '$location', 'userLocationService', function($scope, $location, userLocationService) {
+
+	$scope.userLocation = userLocationService.getLocation();
 
 	function initMap() {
 	  var map = new google.maps.Map(document.getElementById('map'), {
