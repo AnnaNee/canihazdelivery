@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid check-page">
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3 col-xs-12 text-center">
 			<div class="logo logo-lg logo-main">Can I Haz Delivery?</div>
@@ -6,4 +6,22 @@
 	</div>
 </div>
 
-<div id="map"></div>
+<div id="map" class="map"></div>
+
+<div class="container-fluid check-page-body">
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3 col-xs-12 text-center">
+			<div ng-show="isDeliveryAvailable()">
+			</div>
+
+			<div ng-show="!isDeliveryAvailable()">
+				<h1 class="callToAction">Oops! We can't reach you! :(</h1>
+				<p class="warn-message">Looks like our awesome delivery services are not available for your location. You can try another location!</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<button class="btn btn-default btn-block btn-lg check-page-button" ng-href="/#" >
+	<span>Can I Haz Delivery Once Again?</span>
+</button>

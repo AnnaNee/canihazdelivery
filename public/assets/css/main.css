@@ -25,7 +25,7 @@
 }
 
 .btn-lg {
-	font-size: 1.4rem;
+	font-size: 1.4em;
 }
 
 .btn-block {
@@ -49,7 +49,7 @@
 }
 
 .logo-lg {
-	font-size: 4rem;
+	font-size: 4em;
 }
 
 /* General rules */
@@ -57,6 +57,10 @@ body,
 html {
 	margin: 0;
 	height: 100%;
+}
+
+body {
+	font-size: 16px;
 }
 
 /* Main Page */
@@ -88,10 +92,44 @@ html {
 
 .btn-check-delivery:hover:before{
 	content: "We Shall See!";
-	background-color: #ffaa00;
+	background-color: #FFAA00;
 }
 
-/* Availability Page */
-#map {
-height: 100%;
+/* Check Page */
+.map {
+	height: 40%;
+}
+
+.check-page {
+	background-color: #FDB627;
+	height: 30%;
+}
+
+.check-page .logo {
+	margin-top: 4rem;
+}
+
+.check-page-body {
+	background-color: #F75555;
+	height: 20%;
+}
+
+.check-page-body .callToAction {
+	color: #FFF;
+	font-family: 'Wendy One', sans-serif;
+}
+
+.check-page-body .warn-message {
+	color: #FFF;
+	font-family: sans-serif;
+}
+
+.check-page-button {
+	height: 10%;
+}
+
+@media (max-width: 414px) {
+	body {
+		font-size: 11px;
+	}
 }
