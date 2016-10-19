@@ -94,7 +94,7 @@ app.controller('availabilityController', ['$scope', '$location', 'userLocationSe
 		console.log('user:', userLat, userLng, 'place:', placeLat, placeLng)
 
 		var locations = [
-			['Your location', userLat, userLng],
+			['You\'re here!', userLat, userLng],
 			['Can I Haz Delivery?', placeLat, placeLng]
 		];
 
@@ -132,6 +132,13 @@ app.controller('availabilityController', ['$scope', '$location', 'userLocationSe
 		  		map: map,
 		  		position: new google.maps.LatLng(locations[i][1], locations[i][2])
 		  	});
+
+				var infowindow = new google.maps.InfoWindow({
+				  content: locations[i][0],
+				  maxWidth: 160
+				});
+
+				infowindow.open(map, marker);
 		  }
 
 			map.setZoom(10);
