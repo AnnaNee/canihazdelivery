@@ -1,4 +1,4 @@
-var app = angular.module("init", ["ngRoute"]);
+var app = angular.module("init", ["ngRoute", "init.services"]);
 
 app.config(['$routeProvider', function($routeProvider) {
     $routeProvider
@@ -15,6 +15,7 @@ app.config(['$routeProvider', function($routeProvider) {
 app.controller('InitController', ['$scope', '$location',function($scope, $location) {
 
 	$scope.user = {};
+
 	var addressType;
 
 	var placeSearch, autocomplete;
@@ -37,6 +38,7 @@ app.controller('InitController', ['$scope', '$location',function($scope, $locati
 	}
 
 	$scope.fillInAddress = function() {
+
 	  var place = autocomplete.getPlace();
 
 	  for (var component in componentForm) {
@@ -53,6 +55,8 @@ app.controller('InitController', ['$scope', '$location',function($scope, $locati
 	      $scope.user.addressType = val;
 	    }
 	  }
+
+    console.log("Latitude: " + place.geometry.location.lat() + " Longitude: " + place.geometry.location.lng());
 	}
 
 	$scope.checkAdress = function() {
