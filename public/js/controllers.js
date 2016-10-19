@@ -80,22 +80,47 @@ app.controller('InitController', ['$scope', '$location', 'userLocationService', 
 app.controller('availabilityController', ['$scope', '$location', 'userLocationService', function($scope, $location, userLocationService) {
 
 	$scope.userLocation = userLocationService.getLocation();
+	var userLat = $scope.userLocation[0];
+	var userLng = $scope.userLocation[1];
+
+	var placeLat = -23.5842987;
+	var placeLng = -46.6834824;
+
+	var locations = [
+		['Your location', userLat, userLng],
+		['Can I Haz Delivery?', placeLat, placeLng]
+	];
+
+	$scope.isDeliveryAvailable = function() {
+		var toUser = new google.maps.LatLng(userLat, userLng);
+		var fromPlace = new google.maps.LatLng(placeLat, placeLng);
+
+		var calculatedDistance = google.maps.geometry.spherical.computeDistanceBetween(fromPlace, toUser);
+
+		if (calculatedDistance > 4000) {
+			return false;
+		} else {
+			return true;
+	}
 
 	function initMap() {
 	  var map = new google.maps.Map(document.getElementById('map'), {
 	    zoom: 4,
-	    center: {lat: -23.5842987, lng: -46.6834824},
+	    center: {lat: placeLat, lng: placeLng},
 	    mapTypeId: google.maps.MapTypeId.ROADMAP
 	  });
 
-		var marker = new google.maps.Marker({
-		  map: map,
-		  position: new google.maps.LatLng(-23.5842987, -46.6834824),
-		  title: 'Can I Haz Delivery?'
-		});
+	  var marker, i;
+
+	  for (i = 0; i < locations.length; i++) {
+	  	marker = new google.maps.Marker({
+	  		map: map,
+	  		position: new google.maps.LatLng(locations[i][1], locations[i][2])
+	  	});
+	  }
 
 		map.setZoom(10);
-		var miles = 2.48548;
+		var miles = 4000;
 
     var circle = new google.maps.Circle({
       strokeColor: '#FF0000',
@@ -104,7 +129,7 @@ app.controller('availabilityController', ['$scope', '$location', 'userLocationSe
       fillColor: '#FF0000',
       fillOpacity: 0.35,
       map: map,
-      radius: miles * 1609.344 // equals 1 mile in radius
+      radius: miles
     });
 
     circle.bindTo('center', marker, 'position');
