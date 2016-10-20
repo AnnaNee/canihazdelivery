@@ -91,6 +91,10 @@ app.controller('availabilityController', ['$scope', '$location', 'userLocationSe
 		var placeLat = -23.5842987;
 		var placeLng = -46.6834824;
 
+		var directionsDisplay;
+		var directionsService = new google.maps.DirectionsService();
+		var map;
+
 		console.log('user:', userLat, userLng, 'place:', placeLat, placeLng)
 
 		var locations = [
@@ -119,7 +123,9 @@ app.controller('availabilityController', ['$scope', '$location', 'userLocationSe
 
 
 		function initMap() {
-		  var map = new google.maps.Map(document.getElementById('map'), {
+		  directionsDisplay = new google.maps.DirectionsRenderer();
+
+		  map = new google.maps.Map(document.getElementById('map'), {
 		    zoom: 4,
 		    center: {lat: placeLat, lng: placeLng},
 		    mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -155,6 +161,23 @@ app.controller('availabilityController', ['$scope', '$location', 'userLocationSe
 	    });
 
 	    circle.bindTo('center', marker, 'position');
+	    directionsDisplay.setMap(map);
+		}
+
+		$scope.calcRoute = function() {
+			var selectedMode = document.getElementById("mode").value;
+
+		  var request = {
+		      origin: fromPlace,
+		      destination: toUser,
+		      travelMode: google.maps.TravelMode[selectedMode]
+		  };
+
+		  directionsService.route(request, function(response, status) {
+		    if (status == google.maps.DirectionsStatus.OK) {
+		      directionsDisplay.setDirections(response);
+		    }
+		  });
 		}
 
 		initMap();

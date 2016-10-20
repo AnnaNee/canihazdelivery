@@ -28,3 +28,13 @@
 <button class="btn btn-default btn-block btn-lg check-page-button" ng-href="/#" >
 	<span>Can I Haz Delivery Once Again?</span>
 </button>
+
+<div>
+<strong>Mode of Travel: </strong>
+<select id="mode" ng-change="calcRoute()" ng-model="selectedMode">
+  <option value="DRIVING">Driving</option>
+  <option value="WALKING">Walking</option>
+  <option value="BICYCLING">Bicycling</option>
+  <option value="TRANSIT">Transit</option>
+</select>
+</div>
