@@ -22,6 +22,9 @@
 	border: 0;
 	padding: 1rem;
 	cursor: pointer;
+	font-family: 'Wendy One', sans-serif;
+	text-align: center;
+
 }
 
 .btn-lg {
@@ -30,16 +33,28 @@
 
 .btn-block {
 	width: 100%;
+	display: block;
+	box-sizing: border-box;
 }
 
 .btn-default {
 	background-color: #FDB627;
 	color: #FFF;
-	font-family: 'Wendy One', sans-serif;
+	text-decoration: none;
 }
 
 .btn-default:hover{
 	background-color: #FFAA00;
+}
+
+.btn-blank {
+	background-color: #DDD;
+	color: #FFF;
+	text-decoration: none;
+}
+
+.btn-blank:hover{
+	background-color: #AAA;
 }
 
 .logo {
@@ -50,6 +65,19 @@
 
 .logo-lg {
 	font-size: 4em;
+}
+
+.select-input {
+	background-color: #FFF;
+	border: 1px solid #CCC;
+	font-size: 1rem;
+	height: 2rem;
+	padding: .3rem;
+	color: #777;
+}
+
+.input-block {
+	width: 100%;
 }
 
 /* General rules */
@@ -98,6 +126,16 @@ body {
 /* Check Page */
 .map {
 	height: 40%;
+}
+
+.directions-panel {
+	position: absolute;
+	top: 30%;
+	width: 16rem;
+	height: 35%;
+	overflow-y: scroll;
+	background-color: #FFF;
+	padding: 1rem;
 }
 
 .check-page {

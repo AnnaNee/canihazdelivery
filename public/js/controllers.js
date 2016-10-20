@@ -85,26 +85,26 @@ app.controller('availabilityController', ['$scope', '$location', 'userLocationSe
 	} else {
 
 		$scope.userLocation = userLocationService.getLocation();
-		var userLat = $scope.userLocation[0];
-		var userLng = $scope.userLocation[1];
+		$scope.userLat = $scope.userLocation[0];
+		$scope.userLng = $scope.userLocation[1];
 
-		var placeLat = -23.5842987;
-		var placeLng = -46.6834824;
+		$scope.placeLat = -23.5842987;
+		$scope.placeLng = -46.6834824;
 
 		var directionsDisplay;
 		var directionsService = new google.maps.DirectionsService();
 		var map;
 
-		console.log('user:', userLat, userLng, 'place:', placeLat, placeLng)
+		console.log('user:', $scope.userLat, $scope.userLng, 'place:', $scope.placeLat, $scope.placeLng)
 
 		var locations = [
-			['You\'re here!', userLat, userLng],
-			['Can I Haz Delivery?', placeLat, placeLng]
+			['You\'re here!', $scope.userLat, $scope.userLng],
+			['Can I Haz Delivery?', $scope.placeLat, $scope.placeLng]
 		];
 
 		$scope.isDeliveryAvailable = function() {
-			var toUser = new google.maps.LatLng(userLat, userLng);
-			var fromPlace = new google.maps.LatLng(placeLat, placeLng);
+			var toUser = new google.maps.LatLng($scope.userLat, $scope.userLng);
+			var fromPlace = new google.maps.LatLng($scope.placeLat, $scope.placeLng);
 
 			var calculatedDistance = google.maps.geometry.spherical.computeDistanceBetween(fromPlace, toUser);
 
@@ -115,8 +115,8 @@ app.controller('availabilityController', ['$scope', '$location', 'userLocationSe
 			}
 		}
 
-			var toUser = new google.maps.LatLng(userLat, userLng);
-			var fromPlace = new google.maps.LatLng(placeLat, placeLng);
+			var toUser = new google.maps.LatLng($scope.userLat, $scope.userLng);
+			var fromPlace = new google.maps.LatLng($scope.placeLat, $scope.placeLng);
 
 			var calculatedDistance = google.maps.geometry.spherical.computeDistanceBetween(fromPlace, toUser);
 			console.log('Calculated distance:', calculatedDistance);
@@ -127,7 +127,7 @@ app.controller('availabilityController', ['$scope', '$location', 'userLocationSe
 
 		  map = new google.maps.Map(document.getElementById('map'), {
 		    zoom: 4,
-		    center: {lat: placeLat, lng: placeLng},
+		    center: {lat: $scope.placeLat, lng: $scope.placeLng},
 		    mapTypeId: google.maps.MapTypeId.ROADMAP
 		  });
 
@@ -176,6 +176,9 @@ app.controller('availabilityController', ['$scope', '$location', 'userLocationSe
 		  directionsService.route(request, function(response, status) {
 		    if (status == google.maps.DirectionsStatus.OK) {
 		      directionsDisplay.setDirections(response);
+		      directionsDisplay.setPanel(document.getElementById("directionsPanel"));
+
+		      cityCircle.setMap(null);
 		    }
 		  });
 		}
