@@ -1,16 +1,4 @@
-var app = angular.module("init", ["ngRoute", "init.services"]);
-
-app.config(['$routeProvider', function($routeProvider) {
-    $routeProvider
-    .when("/", {
-        templateUrl : "views/main.html",
-        controller: "InitController"
-    })
-    .when("/check", {
-        templateUrl : "views/check.html",
-        controller: "availabilityController"
-    });
-}]);
+var app = angular.module("init", ["ngRoute", "init.services", "init.routes"]);
 
 app.controller('InitController', ['$scope', '$location', 'userLocationService', function($scope, $location, userLocationService) {
 

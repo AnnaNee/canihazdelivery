@@ -1,6 +1,6 @@
-var app = angular.module('init.services', [])
+var app = angular.module('init.services', []);
 
-.service('userLocationService', function() {
+app.service('userLocationService', function() {
   var location = null;
 
   return {
